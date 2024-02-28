@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import shlex
 import sys
-from isa import TermType, Opcode, OpcodeType, OpcodeParamType, OpcodeParam, write_code
+
+import pytest
+
+from isa import Opcode, OpcodeParam, OpcodeParamType, OpcodeType, TermType, write_code
 
 variables = {}
 variable_current_address = 512
@@ -55,8 +58,7 @@ def word_to_term(word: str) -> Term | None:
 
 def read_lines(data: str) -> list[str]:
     code = shlex.split(data.replace("\n", " "), posix=True)
-    code = list(filter(lambda x: len(x) > 0, code))
-    return code
+    return list(filter(lambda x: len(x) > 0, code))
 
 
 def remove_comments(code_lines: list[str]) -> list[str]:
@@ -129,7 +131,7 @@ def set_allot_for_variable(terms: list[Term], term_index: int) -> None:
             assert 1 <= allot_size <= 100, "Incorrect allot size at word #" + str(term.word_number - 1)
             variable_current_address += allot_size
         except ValueError:
-            assert False, "Incorrect allot size at word #" + str(term.word_number - 1)
+            pytest.fail("Incorrect allot size at word #" + str(term.word_number - 1))
 
 
 def set_variables(terms: list[Term]) -> None:
@@ -350,7 +352,7 @@ def translate(data: str) -> list[dict]:
             if len(opcode.params):
                 command["arg"] = int(opcode.params[0].value)
         except Exception:
-            assert False, f"Error: String value given as an operand: {opcode.params[0].value}"
+            pytest.fail("Error: String value given as an operand:" + opcode.params[0].value)
         commands.append(command)
     return commands
 

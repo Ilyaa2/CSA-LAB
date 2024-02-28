@@ -84,14 +84,18 @@ class ALU:
             self.result = self.src_b - self.src_a
         elif self.operation == ALUOpcode.MOD:
             self.result = self.src_b % self.src_a
-        elif self.operation == ALUOpcode.EQ:
+        elif self.operation in [ALUOpcode.EQ, ALUOpcode.GR, ALUOpcode.LS]:
+            self.calc_op_comparison()
+        else:
+            raise f"Unknown ALU operation: {self.operation}"
+
+    def calc_op_comparison(self):
+        if self.operation == ALUOpcode.EQ:
             self.result = int(self.src_a == self.src_b)
         elif self.operation == ALUOpcode.GR:
             self.result = int(self.src_a < self.src_b)
         elif self.operation == ALUOpcode.LS:
             self.result = int(self.src_a >= self.src_b)
-        else:
-            raise f"Unknown ALU operation: {self.operation}"
 
     def set_details(self, src_a, src_b, operation: ALUOpcode) -> None:
         self.src_a = src_a
@@ -101,11 +105,11 @@ class ALU:
 
 class DataPath:
     def __init__(
-            self,
-            memory_size: int,
-            return_stack_size: int,
-            data_stack_size: int,
-            input_buffer: list,
+        self,
+        memory_size: int,
+        return_stack_size: int,
+        data_stack_size: int,
+        input_buffer: list,
     ):
         assert memory_size > 0, "memory size should be greater than zero"
         assert return_stack_size > 0, "return_stack size should be greater than zero"
@@ -187,10 +191,8 @@ class DataPath:
     def signal_latch_top(self, selector: Selector, immediate=0) -> None:
         if selector is Selector.TOP_FROM_PREV:
             self.top = self.prev
-        elif selector is Selector.TOP_FROM_STACK:
-            assert self.sp >= 0, "Data stack underflow"
-            assert self.sp < self.return_stack_size, "Data stack overflow"
-            self.top = self.data_stack[self.sp]
+        elif selector in [Selector.TOP_FROM_STACK, Selector.TOP_FROM_RETSTACK]:
+            self.signal_latch_top_from_stacks(selector)
         elif selector is Selector.TOP_FROM_INPUT:
             self.top = 0
             symbol = self.input_buffer.pop(0)["symbol"]
@@ -200,12 +202,18 @@ class DataPath:
             self.top = self.alu.result
         elif selector is Selector.TOP_FROM_MEM:
             self.top = self.data_memory[self.top]
+        elif selector is Selector.TOP_FROM_IMMEDIATE:
+            self.top = immediate
+
+    def signal_latch_top_from_stacks(self, selector: Selector) -> None:
+        if selector is Selector.TOP_FROM_STACK:
+            assert self.sp >= 0, "Data stack underflow"
+            assert self.sp < self.return_stack_size, "Data stack overflow"
+            self.top = self.data_stack[self.sp]
         elif selector is Selector.TOP_FROM_RETSTACK:
             assert self.rsp >= 0, "Return stack underflow"
             assert self.rsp < self.return_stack_size, "Return stack overflow"
             self.top = self.return_stack[self.rsp]
-        elif selector is Selector.TOP_FROM_IMMEDIATE:
-            self.top = immediate
 
     def signal_latch_prev(self, selector: Selector) -> None:
         if selector is Selector.PREV_FROM_STACK:
@@ -269,7 +277,7 @@ class ControlUnit:
             if val["tick"] > self.tick_number:
                 position = index
                 break
-        self.data_path.input_buffer = self.data_path.input_buffer[0 if position == 0 else position - 1:]
+        self.data_path.input_buffer = self.data_path.input_buffer[0 if position == 0 else position - 1 :]
         if not self.data_path.input_buffer:
             return
         schedule = self.data_path.input_buffer[0]
@@ -291,20 +299,39 @@ class ControlUnit:
             logging.warning("Entering into interruption...")
             self.go_to_interrupt()
 
-    def execute(self, memory_cell):
+    def execute(self, memory_cell: dict[str, int | str]):
         command = OpcodeType(memory_cell["command"])
         arithmetic_operation = opcode_to_alu_opcode(OpcodeType(command))
         if arithmetic_operation is not None:
             self.data_path.signal_alu_operation(arithmetic_operation)
-            self.data_path.signal_latch_top(Selector.TOP_FROM_ALU), "TOP = ALU"
-            self.data_path.signal_latch_sp(Selector.SP_DEC), "SP -= 1"
+            self.data_path.signal_latch_top(Selector.TOP_FROM_ALU)
+            self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
-            (
-                self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK),
-                "PREV = STACK[SP]",
-            )
+            self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
             self.tick()
-        elif command == OpcodeType.PUSH:
+        elif command in [OpcodeType.PUSH, OpcodeType.DROP, OpcodeType.SWAP, OpcodeType.OVER, OpcodeType.DUP]:
+            self.execute_basic_op(memory_cell)
+        elif command in [
+            OpcodeType.LOAD,
+            OpcodeType.STORE,
+            OpcodeType.POP,
+            OpcodeType.RPOP,
+            OpcodeType.EMIT,
+            OpcodeType.READ,
+        ]:
+            self.execute_mem_stacks_io_op(memory_cell)
+        elif command in [OpcodeType.ZJMP, OpcodeType.JMP, OpcodeType.CALL, OpcodeType.RET]:
+            self.execute_jumps_op(memory_cell)
+        elif command == OpcodeType.DI:
+            self.signal_latch_ps(intr_on=False, intr_mode=None)
+            self.tick()
+        elif command == OpcodeType.EI:
+            self.signal_latch_ps(intr_on=True, intr_mode=None)
+            self.tick()
+
+    def execute_basic_op(self, memory_cell: dict[str, int | str]):
+        command = OpcodeType(memory_cell["command"])
+        if command == OpcodeType.PUSH:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_TOP)
             self.tick()
@@ -316,19 +343,6 @@ class ControlUnit:
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
-            self.tick()
-        elif command == OpcodeType.EMIT:
-            self.data_path.signal_output()
-            self.data_path.signal_latch_sp(Selector.SP_DEC)
-            self.tick()
-            self.data_path.signal_latch_top(Selector.TOP_FROM_STACK)
-            self.tick()
-            self.data_path.signal_latch_sp(Selector.SP_DEC)
-            self.tick()
-            self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
-            self.tick()
-        elif command == OpcodeType.READ:
-            self.data_path.signal_latch_top(Selector.TOP_FROM_INPUT)
             self.tick()
         elif command == OpcodeType.SWAP:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_TOP)
@@ -350,7 +364,10 @@ class ControlUnit:
             self.tick()
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
-        elif command == OpcodeType.LOAD:
+
+    def execute_mem_stacks_io_op(self, memory_cell: dict[str, int | str]):
+        command = OpcodeType(memory_cell["command"])
+        if command == OpcodeType.LOAD:
             self.data_path.signal_latch_top(Selector.TOP_FROM_MEM)
             self.tick()
         elif command == OpcodeType.STORE:
@@ -379,7 +396,23 @@ class ControlUnit:
             self.data_path.signal_latch_top(Selector.TOP_FROM_RETSTACK)
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
-        elif command == OpcodeType.ZJMP:
+        elif command == OpcodeType.EMIT:
+            self.data_path.signal_output()
+            self.data_path.signal_latch_sp(Selector.SP_DEC)
+            self.tick()
+            self.data_path.signal_latch_top(Selector.TOP_FROM_STACK)
+            self.tick()
+            self.data_path.signal_latch_sp(Selector.SP_DEC)
+            self.tick()
+            self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
+            self.tick()
+        elif command == OpcodeType.READ:
+            self.data_path.signal_latch_top(Selector.TOP_FROM_INPUT)
+            self.tick()
+
+    def execute_jumps_op(self, memory_cell: dict[str, int | str]):
+        command = OpcodeType(memory_cell["command"])
+        if command == OpcodeType.ZJMP:
             if self.data_path.top == 0:
                 self.data_path.signal_latch_pc(Selector.PC_IMMEDIATE, memory_cell["arg"])
                 self.tick()
@@ -396,12 +429,6 @@ class ControlUnit:
             self.tick()
             self.data_path.signal_latch_pc(Selector.PC_IMMEDIATE, memory_cell["arg"])
             self.data_path.signal_latch_rsp(Selector.RSP_INC)
-            self.tick()
-        elif command == OpcodeType.DI:
-            self.signal_latch_ps(intr_on=False, intr_mode=None)
-            self.tick()
-        elif command == OpcodeType.EI:
-            self.signal_latch_ps(intr_on=True, intr_mode=None)
             self.tick()
         elif command == OpcodeType.RET:
             self.data_path.signal_latch_rsp(Selector.RSP_DEC)
@@ -426,7 +453,7 @@ class ControlUnit:
             self.data_path.data_stack[i] for i in range(self.data_path.sp - 1, self.data_path.sp - 4, -1) if i >= 0
         ]
         tos = [self.data_path.top, self.data_path.prev, *tos_memory]
-        ret_tos = self.data_path.return_stack[self.data_path.rsp - 1: self.data_path.rsp - 4: -1]
+        ret_tos = self.data_path.return_stack[self.data_path.rsp - 1 : self.data_path.rsp - 4 : -1]
         state_repr = (
             "{:4} | TICK: {:4} | INSTR: {:7} | PC: {:3} | PS_REQ {:1} | PS_MODE: {:1} | SP: {:3} | RSP: "
             "{:3} | DATA_MEMORY[TOP] {:7} | TOS : {} | RETURN_TOS : {}"

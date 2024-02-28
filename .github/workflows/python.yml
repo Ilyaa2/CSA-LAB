@@ -6,17 +6,17 @@ on:
       - master
     paths:
       - ".github/workflows/*"
-      - "PythonLab/**"
+      - "src/**"
   pull_request:
     branches:
       - master
     paths:
       - ".github/workflows/*"
-      - "PythonLab/**"
+      - "src/**"
 
 defaults:
   run:
-    working-directory: ./PythonLab
+    working-directory: ./src
 
 jobs:
   test:
