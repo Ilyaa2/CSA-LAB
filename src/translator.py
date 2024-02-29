@@ -68,7 +68,7 @@ def remove_comments(code_lines: list[str]) -> list[str]:
         if index == -1:
             without_comments.append(line)
             continue
-        line = line[0: line.find("#")].strip()
+        line = line[0 : line.find("#")].strip()
         if line != "":
             without_comments.append(line)
     return without_comments
