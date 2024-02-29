@@ -1,0 +1,245 @@
+in_source: |-
+  2 ." Hello world"
+in_stdin: |-
+  []
+out_code: |-
+  [{"index": 0, "command": "jmp", "arg": 1},
+   {"index": 1, "command": "push", "arg": 2},
+   {"index": 2, "command": "pop"},
+   {"index": 3, "command": "push", "arg": 72},
+   {"index": 4, "command": "push", "arg": 0},
+   {"index": 5, "command": "store"},
+   {"index": 6, "command": "push", "arg": 101},
+   {"index": 7, "command": "push", "arg": 1},
+   {"index": 8, "command": "store"},
+   {"index": 9, "command": "push", "arg": 108},
+   {"index": 10, "command": "push", "arg": 2},
+   {"index": 11, "command": "store"},
+   {"index": 12, "command": "push", "arg": 108},
+   {"index": 13, "command": "push", "arg": 3},
+   {"index": 14, "command": "store"},
+   {"index": 15, "command": "push", "arg": 111},
+   {"index": 16, "command": "push", "arg": 4},
+   {"index": 17, "command": "store"},
+   {"index": 18, "command": "push", "arg": 32},
+   {"index": 19, "command": "push", "arg": 5},
+   {"index": 20, "command": "store"},
+   {"index": 21, "command": "push", "arg": 119},
+   {"index": 22, "command": "push", "arg": 6},
+   {"index": 23, "command": "store"},
+   {"index": 24, "command": "push", "arg": 111},
+   {"index": 25, "command": "push", "arg": 7},
+   {"index": 26, "command": "store"},
+   {"index": 27, "command": "push", "arg": 114},
+   {"index": 28, "command": "push", "arg": 8},
+   {"index": 29, "command": "store"},
+   {"index": 30, "command": "push", "arg": 108},
+   {"index": 31, "command": "push", "arg": 9},
+   {"index": 32, "command": "store"},
+   {"index": 33, "command": "push", "arg": 100},
+   {"index": 34, "command": "push", "arg": 10},
+   {"index": 35, "command": "store"},
+   {"index": 36, "command": "push", "arg": 0},
+   {"index": 37, "command": "push", "arg": 11},
+   {"index": 38, "command": "store"},
+   {"index": 39, "command": "push", "arg": 0},
+   {"index": 40, "command": "dup"},
+   {"index": 41, "command": "load"},
+   {"index": 42, "command": "dup"},
+   {"index": 43, "command": "zjmp", "arg": 51},
+   {"index": 44, "command": "rpop"},
+   {"index": 45, "command": "dup"},
+   {"index": 46, "command": "pop"},
+   {"index": 47, "command": "emit"},
+   {"index": 48, "command": "push", "arg": 1},
+   {"index": 49, "command": "add"},
+   {"index": 50, "command": "jmp", "arg": 40},
+   {"index": 51, "command": "drop"},
+   {"index": 52, "command": "drop"},
+   {"index": 53, "command": "halt"}]
+out_stdout: |
+  source LoC: 1 code instr: 54
+  ============================================================
+  Output Symbols: Hello world
+  Output Numbers: []
+  Instruction number: 168
+  Ticks: 524
+out_log: |
+  INFO    machine:__print__     MAIN | TICK:    2 | INSTR: jmp 1   | PC:   1 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:    5 | INSTR: push 2  | PC:   2 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [2, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:    8 | INSTR: pop     | PC:   3 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   11 | INSTR: push 72 | PC:   4 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [72, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   14 | INSTR: push 0  | PC:   5 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [0, 72, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   19 | INSTR: store   | PC:   6 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   22 | INSTR: push 101 | PC:   7 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [101, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   25 | INSTR: push 1  | PC:   8 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [1, 101, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   30 | INSTR: store   | PC:   9 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   33 | INSTR: push 108 | PC:  10 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   36 | INSTR: push 2  | PC:  11 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [2, 108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   41 | INSTR: store   | PC:  12 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   44 | INSTR: push 108 | PC:  13 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   47 | INSTR: push 3  | PC:  14 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [3, 108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   52 | INSTR: store   | PC:  15 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   55 | INSTR: push 111 | PC:  16 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   58 | INSTR: push 4  | PC:  17 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4, 111, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   63 | INSTR: store   | PC:  18 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   66 | INSTR: push 32 | PC:  19 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [32, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   69 | INSTR: push 5  | PC:  20 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [5, 32, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   74 | INSTR: store   | PC:  21 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   77 | INSTR: push 119 | PC:  22 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [119, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   80 | INSTR: push 6  | PC:  23 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [6, 119, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   85 | INSTR: store   | PC:  24 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   88 | INSTR: push 111 | PC:  25 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   91 | INSTR: push 7  | PC:  26 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [7, 111, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   96 | INSTR: store   | PC:  27 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:   99 | INSTR: push 114 | PC:  28 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [114, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  102 | INSTR: push 8  | PC:  29 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [8, 114, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  107 | INSTR: store   | PC:  30 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  110 | INSTR: push 108 | PC:  31 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  113 | INSTR: push 9  | PC:  32 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [9, 108, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  118 | INSTR: store   | PC:  33 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  121 | INSTR: push 100 | PC:  34 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [100, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  124 | INSTR: push 10 | PC:  35 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [10, 100, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  129 | INSTR: store   | PC:  36 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  132 | INSTR: push 0  | PC:  37 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  135 | INSTR: push 11 | PC:  38 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [11, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  140 | INSTR: store   | PC:  39 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  143 | INSTR: push 0  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  146 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  148 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [72, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  151 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [72, 72, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  154 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [72, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  157 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 72, 0, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  160 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 72, 0, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  163 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 72, 0, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: '' << 'H'
+  INFO    machine:__print__     MAIN | TICK:  168 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  171 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 0, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  174 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  176 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  179 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  181 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [101, 1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  184 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [101, 101, 1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  187 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [101, 1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  190 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 101, 1, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  193 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 101, 1, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  196 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 101, 1, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'H' << 'e'
+  INFO    machine:__print__     MAIN | TICK:  201 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  204 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 1, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  207 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  209 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  212 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  214 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  217 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 108, 2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  220 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  223 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 2, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  226 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 108, 2, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  229 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 2, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'He' << 'l'
+  INFO    machine:__print__     MAIN | TICK:  234 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  237 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 2, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  240 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  242 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  245 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [3, 3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  247 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  250 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 108, 3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  253 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  256 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 3, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  259 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 108, 3, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  262 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 3, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hel' << 'l'
+  INFO    machine:__print__     MAIN | TICK:  267 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  270 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 3, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  273 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  275 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  278 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [4, 4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  280 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  283 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 111, 4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  286 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  289 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 111, 4, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  292 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 111, 4, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  295 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 111, 4, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hell' << 'o'
+  INFO    machine:__print__     MAIN | TICK:  300 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  303 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 4, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  306 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      32 | TOS : [5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  308 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      32 | TOS : [5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  311 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]      32 | TOS : [5, 5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  313 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [32, 5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  316 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [32, 32, 5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  319 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [32, 5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  322 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 32, 5, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  325 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 32, 5, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  328 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 32, 5, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello' << ' '
+  INFO    machine:__print__     MAIN | TICK:  333 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]      32 | TOS : [5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  336 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 5, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  339 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     119 | TOS : [6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  341 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     119 | TOS : [6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  344 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     119 | TOS : [6, 6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  346 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [119, 6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  349 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [119, 119, 6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  352 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [119, 6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  355 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 119, 6, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  358 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 119, 6, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  361 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 119, 6, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello ' << 'w'
+  INFO    machine:__print__     MAIN | TICK:  366 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     119 | TOS : [6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  369 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 6, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  372 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  374 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  377 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [7, 7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  379 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  382 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 111, 7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  385 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [111, 7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  388 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 111, 7, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  391 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 111, 7, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  394 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 111, 7, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello w' << 'o'
+  INFO    machine:__print__     MAIN | TICK:  399 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     111 | TOS : [7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  402 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 7, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  405 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     114 | TOS : [8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  407 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     114 | TOS : [8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  410 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     114 | TOS : [8, 8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  412 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [114, 8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  415 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [114, 114, 8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  418 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [114, 8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  421 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 114, 8, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  424 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 114, 8, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  427 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 114, 8, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello wo' << 'r'
+  INFO    machine:__print__     MAIN | TICK:  432 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     114 | TOS : [8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  435 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 8, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  438 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  440 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  443 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [9, 9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  445 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  448 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 108, 9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  451 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [108, 9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  454 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 9, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  457 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 108, 9, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  460 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 108, 9, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello wor' << 'l'
+  INFO    machine:__print__     MAIN | TICK:  465 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  468 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 9, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  471 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     100 | TOS : [10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  473 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     100 | TOS : [10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  476 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     100 | TOS : [10, 10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  478 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [100, 10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  481 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [100, 100, 10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  484 | INSTR: zjmp 51 | PC:  44 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [100, 10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  487 | INSTR: rpop    | PC:  45 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 100, 10, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  490 | INSTR: dup     | PC:  46 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]     108 | TOS : [2, 2, 100, 10, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:  493 | INSTR: pop     | PC:  47 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]     108 | TOS : [2, 100, 10, 4444, 4444] | RETURN_TOS : []
+  DEBUG   machine:signal_output output_symbol_buffer: 'Hello worl' << 'd'
+  INFO    machine:__print__     MAIN | TICK:  498 | INSTR: emit    | PC:  48 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]     100 | TOS : [10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  501 | INSTR: push 1  | PC:  49 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]     101 | TOS : [1, 10, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  504 | INSTR: add     | PC:  50 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]       0 | TOS : [11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  506 | INSTR: jmp 40  | PC:  40 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]       0 | TOS : [11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  509 | INSTR: dup     | PC:  41 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]       0 | TOS : [11, 11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  511 | INSTR: load    | PC:  42 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  514 | INSTR: dup     | PC:  43 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 0, 11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  518 | INSTR: zjmp 51 | PC:  51 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]      72 | TOS : [0, 11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  521 | INSTR: drop    | PC:  52 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   1 | DATA_MEMORY[TOP]       0 | TOS : [11, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK:  524 | INSTR: drop    | PC:  53 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : []

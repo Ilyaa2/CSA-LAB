@@ -7,17 +7,18 @@ in_source: |-
           swap over +
           dup 4000000 >
       until
-      sum
+      sum @
   ;
 
   variable sum
   0 sum !
   1 2 my-loop
+  3 emit
 in_stdin: |-
   []
 out_code: |-
   [{"index": 0, "command": "jmp", "arg": 1},
-   {"index": 1, "command": "jmp", "arg": 25},
+   {"index": 1, "command": "jmp", "arg": 26},
    {"index": 2, "command": "push", "arg": 1},
    {"index": 3, "command": "sub"},
    {"index": 4, "command": "dup"},
@@ -40,28 +41,32 @@ out_code: |-
    {"index": 21, "command": "gr"},
    {"index": 22, "command": "zjmp", "arg": 4},
    {"index": 23, "command": "push", "arg": 512},
-   {"index": 24, "command": "ret"},
-   {"index": 25, "command": "push", "arg": 0},
-   {"index": 26, "command": "push", "arg": 512},
-   {"index": 27, "command": "store"},
-   {"index": 28, "command": "push", "arg": 1},
-   {"index": 29, "command": "push", "arg": 2},
-   {"index": 30, "command": "call", "arg": 2},
-   {"index": 31, "command": "halt"}]
+   {"index": 24, "command": "load"},
+   {"index": 25, "command": "ret"},
+   {"index": 26, "command": "push", "arg": 0},
+   {"index": 27, "command": "push", "arg": 512},
+   {"index": 28, "command": "store"},
+   {"index": 29, "command": "push", "arg": 1},
+   {"index": 30, "command": "push", "arg": 2},
+   {"index": 31, "command": "call", "arg": 2},
+   {"index": 32, "command": "push", "arg": 3},
+   {"index": 33, "command": "emit"},
+   {"index": 34, "command": "halt"}]
 out_stdout: |
-  source LoC: 14 code instr: 32
+  source LoC: 15 code instr: 35
   ============================================================
-  Output: 
-  Instruction number: 495
-  Ticks: 1577
+  Output Symbols: 
+  Output Numbers: [4613732]
+  Instruction number: 498
+  Ticks: 1587
 out_log: |
   INFO    machine:__print__     MAIN | TICK:    2 | INSTR: jmp 1   | PC:   1 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:    4 | INSTR: jmp 25  | PC:  25 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:    7 | INSTR: push 0  | PC:  26 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [0, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:   10 | INSTR: push 512 | PC:  27 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [512, 0, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:   15 | INSTR: store   | PC:  28 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:   18 | INSTR: push 1  | PC:  29 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [1, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
-  INFO    machine:__print__     MAIN | TICK:   21 | INSTR: push 2  | PC:  30 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [2, 1, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:    4 | INSTR: jmp 26  | PC:  26 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:    7 | INSTR: push 0  | PC:  27 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [0, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:   10 | INSTR: push 512 | PC:  28 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [512, 0, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:   15 | INSTR: store   | PC:  29 | PS_REQ 0 | PS_MODE: 1 | SP:   0 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:   18 | INSTR: push 1  | PC:  30 | PS_REQ 0 | PS_MODE: 1 | SP:   1 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [1, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK:   21 | INSTR: push 2  | PC:  31 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [2, 1, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
   INFO    machine:__print__     MAIN | TICK:   24 | INSTR: call 2  | PC:   2 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [2, 1, 4444, 4444] | RETURN_TOS : []
   INFO    machine:__print__     MAIN | TICK:   27 | INSTR: push 1  | PC:   3 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [1, 2, 1, 4444, 4444] | RETURN_TOS : []
   INFO    machine:__print__     MAIN | TICK:   30 | INSTR: sub     | PC:   4 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [1, 1, 4444, 4444] | RETURN_TOS : []
@@ -548,4 +553,8 @@ out_log: |
   INFO    machine:__print__     MAIN | TICK: 1568 | INSTR: gr      | PC:  22 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP]    1111 | TOS : [1, 5702887, 3524578, 4444, 4444] | RETURN_TOS : []
   INFO    machine:__print__     MAIN | TICK: 1571 | INSTR: zjmp 4  | PC:  23 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   1 | DATA_MEMORY[TOP] ?       | TOS : [5702887, 3524578, 4444, 4444] | RETURN_TOS : []
   INFO    machine:__print__     MAIN | TICK: 1574 | INSTR: push 512 | PC:  24 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP] 4613732 | TOS : [512, 5702887, 3524578, 4444, 4444] | RETURN_TOS : []
-  INFO    machine:__print__     MAIN | TICK: 1577 | INSTR: ret     | PC:  31 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP] 4613732 | TOS : [512, 5702887, 3524578, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK: 1576 | INSTR: load    | PC:  25 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   1 | DATA_MEMORY[TOP] ?       | TOS : [4613732, 5702887, 3524578, 4444, 4444] | RETURN_TOS : []
+  INFO    machine:__print__     MAIN | TICK: 1579 | INSTR: ret     | PC:  32 | PS_REQ 0 | PS_MODE: 1 | SP:   3 | RSP:   0 | DATA_MEMORY[TOP] ?       | TOS : [4613732, 5702887, 3524578, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  INFO    machine:__print__     MAIN | TICK: 1582 | INSTR: push 3  | PC:  33 | PS_REQ 0 | PS_MODE: 1 | SP:   4 | RSP:   0 | DATA_MEMORY[TOP]    1111 | TOS : [3, 4613732, 5702887, 3524578, 4444] | RETURN_TOS : [2222, 2222, 2222]
+  DEBUG   machine:signal_output output_numeric_buffer: [] << 4613732
+  INFO    machine:__print__     MAIN | TICK: 1587 | INSTR: emit    | PC:  34 | PS_REQ 0 | PS_MODE: 1 | SP:   2 | RSP:   0 | DATA_MEMORY[TOP] ?       | TOS : [5702887, 3524578, 4444, 4444] | RETURN_TOS : [2222, 2222, 2222]

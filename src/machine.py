@@ -89,7 +89,7 @@ class ALU:
         else:
             raise f"Unknown ALU operation: {self.operation}"
 
-    def calc_op_comparison(self):
+    def calc_op_comparison(self) -> None:
         if self.operation == ALUOpcode.EQ:
             self.result = int(self.src_a == self.src_b)
         elif self.operation == ALUOpcode.GR:
@@ -130,7 +130,8 @@ class DataPath:
         self.data_stack_size = data_stack_size
         self.data_stack = [3333] * data_stack_size
         self.input_buffer = input_buffer
-        self.output_buffer = []
+        self.output_buffer_symbols = []
+        self.output_buffer_nums = []
 
     def signal_latch_rsp(self, selector: Selector) -> None:
         if selector is Selector.RSP_DEC:
@@ -179,14 +180,18 @@ class DataPath:
 
     def signal_output(self) -> None:
         port_num = self.top
-        if port_num == 1:
+        if port_num == 2:
             symbol = chr(self.prev)
             logging.debug(
                 "output_symbol_buffer: %s << %s",
-                repr("".join(self.output_buffer)),
+                repr("".join(self.output_buffer_symbols)),
                 repr(symbol),
             )
-            self.output_buffer.append(symbol)
+            self.output_buffer_symbols.append(symbol)
+        elif port_num == 3:
+            symbol = self.prev
+            logging.debug("output_numeric_buffer: [%s] << %d", ", ".join(map(str, self.output_buffer_nums)), symbol)
+            self.output_buffer_nums.append(symbol)
 
     def signal_latch_top(self, selector: Selector, immediate=0) -> None:
         if selector is Selector.TOP_FROM_PREV:
@@ -252,7 +257,7 @@ class ControlUnit:
             assert 0 <= mem_cell < self.program_memory_size, "Program index out of memory size"
             self.program_memory[mem_cell] = opcode
 
-    def signal_latch_ps(self, intr_on: bool | None, intr_mode: bool | None):
+    def signal_latch_ps(self, intr_on: bool | None, intr_mode: bool | None) -> None:
         if intr_on is not None:
             self.ps["Intr_On"] = intr_on
         if intr_mode is not None:
@@ -269,7 +274,7 @@ class ControlUnit:
             self.tick()
             self.ps["Intr_Mode"] = True
 
-    def check_for_interruptions(self):
+    def check_for_interruptions(self) -> None:
         if not self.ps["Intr_On"]:
             return
         position = 0
@@ -288,7 +293,7 @@ class ControlUnit:
     def tick(self) -> None:
         self.tick_number += 1
 
-    def command_cycle(self):
+    def command_cycle(self) -> None:
         self.number_of_instructions += 1
         command = self.decode_and_execute_instruction()
         self.check_for_interruptions()
@@ -299,7 +304,7 @@ class ControlUnit:
             logging.warning("Entering into interruption...")
             self.go_to_interrupt()
 
-    def execute(self, memory_cell: dict[str, int | str]):
+    def execute(self, memory_cell: dict[str, int | str]) -> None:
         command = OpcodeType(memory_cell["command"])
         arithmetic_operation = opcode_to_alu_opcode(OpcodeType(command))
         if arithmetic_operation is not None:
@@ -329,7 +334,7 @@ class ControlUnit:
             self.signal_latch_ps(intr_on=True, intr_mode=None)
             self.tick()
 
-    def execute_basic_op(self, memory_cell: dict[str, int | str]):
+    def execute_basic_op(self, memory_cell: dict[str, int | str]) -> None:
         command = OpcodeType(memory_cell["command"])
         if command == OpcodeType.PUSH:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_PREV)
@@ -365,7 +370,7 @@ class ControlUnit:
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
 
-    def execute_mem_stacks_io_op(self, memory_cell: dict[str, int | str]):
+    def execute_mem_stacks_io_op(self, memory_cell: dict[str, int | str]) -> None:
         command = OpcodeType(memory_cell["command"])
         if command == OpcodeType.LOAD:
             self.data_path.signal_latch_top(Selector.TOP_FROM_MEM)
@@ -410,7 +415,7 @@ class ControlUnit:
             self.data_path.signal_latch_top(Selector.TOP_FROM_INPUT)
             self.tick()
 
-    def execute_jumps_op(self, memory_cell: dict[str, int | str]):
+    def execute_jumps_op(self, memory_cell: dict[str, int | str]) -> None:
         command = OpcodeType(memory_cell["command"])
         if command == OpcodeType.ZJMP:
             if self.data_path.top == 0:
@@ -488,7 +493,7 @@ def parse_to_tokens(input_file: str) -> list:
     return tokens
 
 
-def simulation(code: list, limit: int, input_tokens: list[tuple]):
+def simulation(code: list, limit: int, input_tokens: list[tuple]) -> list[list, list, int, int]:
     data_path = DataPath(15000, 15000, 15000, input_tokens)
     control_unit = ControlUnit(data_path, 15000)
     control_unit.fill_memory(code)
@@ -499,7 +504,8 @@ def simulation(code: list, limit: int, input_tokens: list[tuple]):
             break
 
     return [
-        control_unit.data_path.output_buffer,
+        control_unit.data_path.output_buffer_symbols,
+        control_unit.data_path.output_buffer_nums,
         control_unit.number_of_instructions,
         control_unit.tick_number,
     ]
@@ -511,12 +517,14 @@ def main(code_path: str, token_path: str | None) -> None:
         input_tokens = parse_to_tokens(token_path)
 
     code = read_code(code_path)
-    output, instr_num, ticks = simulation(
+    symbols, nums, instr_num, ticks = simulation(
         code,
         limit=7000,
         input_tokens=input_tokens,
     )
-    print(f"Output: {''.join(output)}\nInstruction number: {instr_num!s}\nTicks: {ticks - 1!s}")
+    print(
+        f"Output Symbols: {''.join(symbols)}\nOutput Numbers: {nums}\nInstruction number: {instr_num!s}\nTicks: {ticks - 1!s}"
+    )
 
 
 if __name__ == "__main__":
