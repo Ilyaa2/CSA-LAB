@@ -105,11 +105,11 @@ class ALU:
 
 class DataPath:
     def __init__(
-        self,
-        memory_size: int,
-        return_stack_size: int,
-        data_stack_size: int,
-        input_buffer: list,
+            self,
+            memory_size: int,
+            return_stack_size: int,
+            data_stack_size: int,
+            input_buffer: list,
     ):
         assert memory_size > 0, "memory size should be greater than zero"
         assert return_stack_size > 0, "return_stack size should be greater than zero"
@@ -277,7 +277,7 @@ class ControlUnit:
             if val["tick"] > self.tick_number:
                 position = index
                 break
-        self.data_path.input_buffer = self.data_path.input_buffer[0 if position == 0 else position - 1 :]
+        self.data_path.input_buffer = self.data_path.input_buffer[0 if position == 0 else position - 1:]
         if not self.data_path.input_buffer:
             return
         schedule = self.data_path.input_buffer[0]
@@ -453,7 +453,7 @@ class ControlUnit:
             self.data_path.data_stack[i] for i in range(self.data_path.sp - 1, self.data_path.sp - 4, -1) if i >= 0
         ]
         tos = [self.data_path.top, self.data_path.prev, *tos_memory]
-        ret_tos = self.data_path.return_stack[self.data_path.rsp - 1 : self.data_path.rsp - 4 : -1]
+        ret_tos = self.data_path.return_stack[self.data_path.rsp - 1: self.data_path.rsp - 4: -1]
         state_repr = (
             "{:4} | TICK: {:4} | INSTR: {:7} | PC: {:3} | PS_REQ {:1} | PS_MODE: {:1} | SP: {:3} | RSP: "
             "{:3} | DATA_MEMORY[TOP] {:7} | TOS : {} | RETURN_TOS : {}"

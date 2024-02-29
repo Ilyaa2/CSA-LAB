@@ -8,9 +8,9 @@ import pytest
 from isa import Opcode, OpcodeParam, OpcodeParamType, OpcodeType, TermType, write_code
 
 variables = {}
+functions = {}
 variable_current_address = 512
 string_current_address = 0
-functions = {}
 
 
 class Term:
@@ -68,7 +68,7 @@ def remove_comments(code_lines: list[str]) -> list[str]:
         if index == -1:
             without_comments.append(line)
             continue
-        line = line[0 : line.find("#")].strip()
+        line = line[0: line.find("#")].strip()
         if line != "":
             without_comments.append(line)
     return without_comments
@@ -358,6 +358,13 @@ def translate(data: str) -> list[dict]:
 
 
 def main(source_file: str, target_file: str):
+    global variables, functions, variable_current_address, string_current_address
+
+    variables = {}
+    functions = {}
+    variable_current_address = 512
+    string_current_address = 0
+
     with open(source_file) as file:
         data = file.read()
     commands = translate(data)
