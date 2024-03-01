@@ -339,20 +339,19 @@ class ControlUnit:
         if command == OpcodeType.PUSH:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_TOP)
-            self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_IMMEDIATE, memory_cell["arg"])
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
         elif command == OpcodeType.DROP:
-            self.data_path.signal_latch_top(Selector.TOP_FROM_PREV)
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
+            self.data_path.signal_latch_top(Selector.TOP_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
             self.tick()
         elif command == OpcodeType.SWAP:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_TOP)
-            self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_PREV)
+            self.tick()
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
             self.tick()
         elif command == OpcodeType.OVER:
@@ -360,13 +359,11 @@ class ControlUnit:
             self.data_path.signal_latch_prev(Selector.PREV_FROM_TOP)
             self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_STACK)
-            self.tick()
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
         elif command == OpcodeType.DUP:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_TOP)
-            self.tick()
             self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
 
@@ -380,33 +377,31 @@ class ControlUnit:
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_STACK)
-            self.tick()
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
             self.tick()
         elif command == OpcodeType.POP:
             self.data_path.signal_retstack_wr(Selector.RETSTACK_FROM_TOP)
+            self.data_path.signal_latch_rsp(Selector.RSP_INC)
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
-            self.data_path.signal_latch_rsp(Selector.RSP_INC)
             self.data_path.signal_latch_top(Selector.TOP_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
             self.tick()
         elif command == OpcodeType.RPOP:
             self.data_path.signal_stack_wr(Selector.STACK_FROM_PREV)
             self.data_path.signal_latch_prev(Selector.PREV_FROM_TOP)
+            self.data_path.signal_latch_sp(Selector.SP_INC)
             self.data_path.signal_latch_rsp(Selector.RSP_DEC)
             self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_RETSTACK)
-            self.data_path.signal_latch_sp(Selector.SP_INC)
             self.tick()
         elif command == OpcodeType.EMIT:
             self.data_path.signal_output()
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_STACK)
-            self.tick()
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_prev(Selector.PREV_FROM_STACK)
@@ -420,7 +415,6 @@ class ControlUnit:
         if command == OpcodeType.ZJMP:
             if self.data_path.top == 0:
                 self.data_path.signal_latch_pc(Selector.PC_IMMEDIATE, memory_cell["arg"])
-                self.tick()
             self.data_path.signal_latch_sp(Selector.SP_DEC)
             self.tick()
             self.data_path.signal_latch_top(Selector.TOP_FROM_PREV)
@@ -431,7 +425,6 @@ class ControlUnit:
             self.tick()
         elif command == OpcodeType.CALL:
             self.data_path.signal_retstack_wr(Selector.RETSTACK_FROM_PC)
-            self.tick()
             self.data_path.signal_latch_pc(Selector.PC_IMMEDIATE, memory_cell["arg"])
             self.data_path.signal_latch_rsp(Selector.RSP_INC)
             self.tick()
