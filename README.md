@@ -216,7 +216,7 @@
 Реализовано в модуле [translator.py](src/translator.py).
 
 Этапы трансляции (функция translate):
-(ПРОПУСТИЛ)
+
 ...
 
 # Модель процессора
@@ -225,11 +225,22 @@
 
 Реализовано в модуле: [machine.py](src/machine.py).
 
-Stack:
+### Stack Approach:
+![img.png](images/DataStack.png)
 
-Datapath:
+### Datapath:
+![img_1.png](images/Datapath.png)
 
-Control Unit:
+### Control Unit:
+![img_2.png](images/ControlUnit.png)
+
+DataPath находится в классе [machine.py:DataPath](src/machine.py).
+
+ControlUnit находится в классе [machine.py:ControlUnit](src/machine.py).
+
+Stack Approach включен в класс [machine.py:DataPath](src/machine.py).
+
+По ссылке доступна более полная [схема процессора](https://viewer.diagrams.net/index.html?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=CSA.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D12XX7sYATKXMLtYJu42ERG1WlpAibQEMV%26export%3Ddownload#%7B%22pageId%22%3A%22VrHovuQIk03kW5obrpS9%22%7D)
 
 # Система команд:
 
@@ -251,16 +262,19 @@ Control Unit:
 | call                                | 1) Ret_stack[rsp] = PC; PC = Immediate; rsp++;                                             | 1     |
 | ret                                 | 1) rsp--; <br/>  2) pc = ret_stack[rsp]                                                    | 2     |
 
-В таблице описываются последовательно все сигналы, которые выставляет instruction decoder.
+В таблице описываются последовательно все сигналы, которые выставляет instruction decoder. 
 
-Имеющаяся память:
+### Справка 
+SP указывает на первую свободную ячейку.
+
+### Имеющаяся память:
 
 - Data Stack - стек, в котором хранятся данные программы
 - Return Stack - стек, в котором хранятся адреса возврата.
 - Instruction Memory - память, в которой хранятся все команды (однопортовая)
 - Data Memory - память данных (однопортовая)
 
-Регистры (соответствуют регистрам на схеме):
+### Регистры (соответствуют регистрам на схеме):
 
 - TOP
 - PREV
@@ -269,7 +283,7 @@ Control Unit:
 - PC
 - PS
 
-Объекты:
+### Объекты:
 
 - input_buffer -- входной буфер данных
     - номер порта = 1
