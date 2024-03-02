@@ -47,7 +47,6 @@ def word_to_term(word: str) -> Term | None:
         "if": TermType.IF,
         "else": TermType.ELSE,
         "then": TermType.THEN,
-        ".": TermType.EMIT,
         ":": TermType.DEF,
         ";": TermType.RET,
         ":intr": TermType.DEF_INTR,
