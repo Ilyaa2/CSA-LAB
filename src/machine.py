@@ -41,10 +41,6 @@ class Selector(str, Enum):
 
 
 class ALUOpcode(str, Enum):
-    INC_A = "inc_a"
-    INC_B = "inc_b"
-    DEC_A = "dec_a"
-    DEC_B = "dec_b"
     ADD = "add"
     MUL = "mul"
     DIV = "div"
